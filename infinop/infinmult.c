@@ -5,6 +5,7 @@
 ** infinmult
 */
 
+#include <stdlib.h>
 #include "my.h"
 #include "operations.h"
 
@@ -18,7 +19,7 @@ static char get_sign(char *nb1, char *nb2)
         return (1);
 }
 
-static void *remove_zeros(char **result, char sign)
+static void remove_zeros(char **result, char sign)
 {
     while (**result == '0' && *(*result + 1) != '\0')
         *result += 1;
@@ -56,11 +57,9 @@ char *infinmult(char *nb1, char *nb2)
     int len1 = (*nb1 == '-' ? my_strlen(nb1) - 1 : my_strlen(nb1));
     int len2 = (*nb2 == '-' ? my_strlen(nb2) - 1 : my_strlen(nb2));
     char *result;
-    
-    printf("%p\n", nb1);
+
     nb1 = my_strdup(nb1);
     nb2 = my_strdup(nb2);
-    printf("%p\n", nb1);
     my_revstr(nb1);
     my_revstr(nb2);
     if (len2 > len1) {

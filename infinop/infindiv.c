@@ -5,6 +5,7 @@
 ** infindiv
 */
 
+#include <stdlib.h>
 #include "my.h"
 #include "operations.h"
 

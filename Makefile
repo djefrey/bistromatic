@@ -5,12 +5,13 @@
 ## makefile of infinadd
 ##
 
-SRC			=	infinadd.c	\
-				infinsub.c	\
-				infinmult.c	\
-				infindiv.c	\
-				infinmod.c	\
-				operations.c
+SRC			=	evalexpr.c				\
+				./infinop/infinadd.c	\
+				./infinop/infinsub.c	\
+				./infinop/infinmult.c	\
+				./infinop/infindiv.c	\
+				./infinop/infinmod.c	\
+				./infinop/operations.c
 MAIN		=	main.c
 TEST		=	./tests/tests.c
 LIB_DIR		=	./lib/my/

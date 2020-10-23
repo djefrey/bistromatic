@@ -5,6 +5,7 @@
 ** infinsub
 */
 
+#include <stdlib.h>
 #include "infinop.h"
 #include "my.h"
 

@@ -7,7 +7,7 @@
 
 SRC		=	$(wildcard *.c)
 INC_DIR	=	../../include/
-CFLAGS	=	-W -Wall -I$(INC_DIR)
+CFLAGS	+=	-W -Wall -I$(INC_DIR)
 OBJ		=	$(SRC:.c=.o)
 NAME	=	libmy.a
 
