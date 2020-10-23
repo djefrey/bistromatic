@@ -21,6 +21,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 char *my_strdup(char const *src);
 int my_strlen(char const *str);
 int my_strcmp(char const *s1, char const *s2);
+int my_strncmp(char const *s1, char const *s2, int n);
 int my_getnbr(char const *str);
 char *my_strncpy(char *dest, char const *src, int n);
 void my_fillstr(char *str, char c, int size);

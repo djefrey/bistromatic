@@ -16,7 +16,7 @@ int add_op(char c1, char c2, int *carry)
     int result = a + b + *carry;
 
     if (result > 9) {
-        *carry = 1;
+        *carry = result / 10;
         result = result - 10;
     } else
         *carry = 0;
@@ -30,7 +30,7 @@ int subs_op(char c1, char c2, int *carry)
     int result = a - b + *carry;
 
     if (result < 0) {
-        *carry = -1;
+        *carry = (result - 9) / 10;
         result = 10 + result;
     } else {
         *carry = 0;
