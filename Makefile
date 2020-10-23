@@ -20,8 +20,8 @@ CFLAGS		+=	-g -W -Wall -I$(INC_DIR)
 OBJ			=	$(SRC:.c=.o)
 MAIN_OBJ	=	$(MAIN:.c=.o)
 TEST_OBJ	=	$(TEST:.c=.o)
-NAME		=	infin_op
-NAME_CRIT	=	infin_op_crit
+NAME		=	calc
+NAME_CRIT	=	calc_crit
 
 all:	$(NAME)
 
