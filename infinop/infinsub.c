@@ -21,7 +21,7 @@ char *infinsub(char *nb1, char *nb2)
     } else {
         new_nb2 = malloc(sizeof(char) * (len2 + 2));
         new_nb2[0] = '-';
-        my_strcat(new_nb2, nb2);
+        my_strcpy(new_nb2, nb2);
         need_free = 1;
     }
     result = infinadd(nb1, new_nb2);
