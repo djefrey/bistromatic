@@ -11,7 +11,7 @@ int main(int ac, char **av)
 {
     char *result;
 
-    if (ac == 2) {
+    if (ac >= 2) {
         result = eval_expr(av[1]);
         my_putstr(result);
         my_putchar('\n');
