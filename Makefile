@@ -33,7 +33,7 @@ criterion: $(OBJ) $(TEST_OBJ)
 	make -C $(LIB_DIR)
 	gcc -o $(NAME_CRIT) $(TEST_OBJ) $(OBJ) -I$(INC_DIR) -L$(LIB_DIR) -lmy -lcriterion
 
-clean: $(OBJ) $(MAIN_OBJ)
+clean:
 	make -C $(LIB_DIR) clean
 	rm -rf $(OBJ)
 	rm -f $(MAIN_OBJ)
