@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "my.h"
-#include "evalexpr.h"s
+#include "evalexpr.h"
 
 int main(int ac, char **av)
 {
