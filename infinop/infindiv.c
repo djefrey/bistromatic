@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 #include "operations.h"
+#include "infinop.h"
 
 static char is_first_bigger(char *nb1, char *nb2, int len1, int len2)
 {
@@ -41,7 +42,7 @@ static void move_chars_to_left(char *str, char c)
     *str = c;
 }
 
-static char *do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
+static void do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
 {
     char *carry = malloc(sizeof(char) * (len1 + 1));
     char *div_res;
@@ -53,7 +54,8 @@ static char *do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
         move_chars_to_left(carry, nb1[i]);
         carry_size++;
         div_res = div_op(carry, nb2);
-        if (!(*div_res == '0' && *(div_res + 1) == '\0') || carry_size >= my_strlen(nb2)) {
+        if (!(*div_res == '0' && *(div_res + 1) == '\0')
+            || carry_size >= my_strlen(nb2) || i == len1 - 1) {
             move_chars_to_left(quotient, *div_res);
             sub = infinsub(carry, infinmult(div_res, nb2));
             carry_size = my_strlen(sub);

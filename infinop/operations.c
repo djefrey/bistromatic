@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 #include "operations.h"
+#include "infinop.h"
 
 int add_op(char c1, char c2, int *carry)
 {
@@ -54,22 +55,18 @@ int mult_op(char c1, char c2, int *carry)
 
 char *div_op(char *c1, char *divisor)
 {
-    char *n_str = my_intstr(0);
+    int n_times = 1;
     char *sub = infinsub(c1, divisor);
     char *mult;
-    int n_times = 0;
 
-    while (*sub != '-') {
+    if (*sub == '-')
+        return (my_strdup("0"));
+    while (*sub != '-' && !(*sub == '0' && *(sub + 1) == 0)) {
         n_times++;
-        n_str = my_intstr(n_times);
-        mult = infinmult(n_str, divisor);
+        mult = infinmult(my_intstr(n_times), divisor);
         sub = infinsub(c1, mult);
-        if (!(*sub == '0' && *(sub + 1) == '\0'))
-            break;
     }
-    if (n_times > 1 && *sub == '-')
-        n_str = my_intstr(n_times - 1);
-    return (n_str);
+    return (my_intstr(n_times));
 }
 
 add_fct_t get_addop(char last1, char last2)

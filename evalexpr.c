@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 #include "evalexpr.h"
+#include "infinop.h"
 
 char *number(char **str_ptr)
 {
@@ -83,7 +84,6 @@ char *eval_expr(char const *str)
     char *expr = malloc(sizeof(char) * (len + 1));
     char *sum;
     int cursor = 0;
-    int offset = 0;
 
     for (int i = 0; i < len; i++) {
         if (str[i] != ' ') {

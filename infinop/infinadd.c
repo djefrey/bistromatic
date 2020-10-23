@@ -105,5 +105,7 @@ char *infinadd(char *nb1, char *nb2)
     lens[1] = len2;
     op = get_addop(nb1[len1], nb2[len2]);
     result = do_infinadd(strs, lens, op, sign);
+    free(nb1);
+    free(nb2);
     return (result);
 }

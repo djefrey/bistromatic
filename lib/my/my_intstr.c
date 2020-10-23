@@ -5,13 +5,7 @@
 ** convert an int to a string
 */
 
-/*
-** EPITECH PROJECT, 2020
-** my_put_nbr
-** File description:
-** print number that is provided
-*/
-
+#include <stdlib.h>
 #include "my.h"
 
 static unsigned char is_neg(long nb)
