@@ -55,7 +55,6 @@ static char *do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
         div_res = div_op(carry, nb2);
         if (!(*div_res == '0' && *(div_res + 1) == '\0') || carry_size >= my_strlen(nb2)) {
             move_chars_to_left(quotient, *div_res);
-            printf("%s - %s * %s\n", carry, div_res, nb2);
             sub = infinsub(carry, infinmult(div_res, nb2));
             carry_size = my_strlen(sub);
             for (int i = 0; i < len1 + 1; i++)

@@ -59,14 +59,15 @@ char *div_op(char *c1, char *divisor)
     char *mult;
     int n_times = 0;
 
-    while (*sub != '-' && !(*sub == '0' && *(sub + 1) == '\0')) {
+    while (*sub != '-') {
         n_times++;
-        printf("%s - %s, %i\n", c1, divisor, n_times);
         n_str = my_intstr(n_times);
         mult = infinmult(n_str, divisor);
         sub = infinsub(c1, mult);
+        if (!(*sub == '0' && *(sub + 1) == '\0'))
+            break;
     }
-    if (n_times > 0 && *sub == '-')
+    if (n_times > 1 && *sub == '-')
         n_str = my_intstr(n_times - 1);
     return (n_str);
 }

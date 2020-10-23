@@ -19,9 +19,7 @@ char *infinmod(char *nb1, char *nb2)
 
     my_fillstr(ten_factor, '0', nb1_len);
     ten_factor[0] = '1';
-    printf("%s(%i), %s\n", div, *div, ten_factor);
     mult = infinmult(div, ten_factor);
-    printf("%s - %s\n", nb1, mult);
     sub = infinsub(nb1, mult);
     return (sub);
 }
