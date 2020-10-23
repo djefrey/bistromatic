@@ -19,7 +19,7 @@ static char switch_bigger_n_first(char **nb1, char **nb2, int *len1, int *len2)
     if (*len2 > *len1) {
         my_strswap(nb1, nb2);
         my_intswap(len1, len2);
-    } else if (*len1 == *len2 && my_strcmp(*nb1, *nb2) < 0) {
+    } else if (*len1 == *len2 && my_strcmp(*nb1, *nb2) > 0) {
         my_strswap(nb1, nb2);
         my_intswap(len1, len2);
     }
