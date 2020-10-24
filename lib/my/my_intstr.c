@@ -46,5 +46,6 @@ char *my_intstr(int nb)
         length /= 10;
         i++;
     }
+    str[i] = '\0';
     return (str);
 }
