@@ -68,7 +68,5 @@ char *infinmult(char *nb1, char *nb2)
     }
     result = do_infinmult(nb1, nb2, len1, len2);
     remove_zeros(&result, sign);
-    free(nb1);
-    free(nb2);
     return (result);
 }

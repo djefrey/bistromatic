@@ -25,7 +25,5 @@ char *infinsub(char *nb1, char *nb2)
         need_free = 1;
     }
     result = infinadd(nb1, new_nb2);
-    if (need_free)
-        free(new_nb2);
     return (result);
 }
