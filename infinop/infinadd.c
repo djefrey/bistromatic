@@ -59,7 +59,7 @@ static char *finish_calc(char *result, char *nbrs[], int carry, char sign)
         if (neg || sign == -1) {
             result[1] = '-';
             result = (result + 1);
-        } else 
+        } else
             result = (result + 2);
     }
     result = remove_zeros(result);
@@ -88,22 +88,22 @@ static char *do_infinadd(char *nbrs[], int lens[], add_fct_t op, char sign)
 
 char *infinadd(char *nb1, char *nb2)
 {
+    char *cpy1;
+    char *cpy2;
     add_fct_t op;
-    int len1;
-    int len2;
     char *strs[2];
     int lens[2];
     char sign = 0;
     char *result;
 
-    nb1 = remove_zeros(my_strdup(nb1));
-    nb2 = remove_zeros(my_strdup(nb2));
-    sign = switch_bigger_n_first(&nb1, &nb2, &len1, &len2);
-    strs[0] = nb1;
-    strs[1] = nb2;
-    lens[0] = len1;
-    lens[1] = len2;
-    op = get_addop(nb1[len1], nb2[len2]);
+    cpy1 = my_strdup(nb1);
+    cpy2 = my_strdup(nb2);
+    strs[0] = remove_zeros(cpy1);
+    strs[1] = remove_zeros(cpy2);
+    sign = switch_bigger_n_first(&strs[0], &strs[1], &lens[0], &lens[1]);
+    op = get_addop(*(strs[0] + lens[0]), *(strs[1] + lens[1]));
     result = do_infinadd(strs, lens, op, sign);
+    free(cpy1);
+    free(cpy2);
     return (result);
 }
