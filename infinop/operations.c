@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinadd
+** bistromatic
 ** File description:
 ** operations for infinadd
 */
