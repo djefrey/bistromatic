@@ -16,6 +16,7 @@ MAIN		=	main.c
 TESTS		=	./tests/add_tests.c		\
 				./tests/mult_tests.c	\
 				./tests/div_tests.c		\
+				./tests/mod_tests.c		\
 				./tests/expr_tests.c
 LIB_DIR		=	./lib/my/
 INC_DIR		=	./include/
