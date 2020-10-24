@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinmod
+** bistromatic
 ** File description:
 ** infinmod
 */

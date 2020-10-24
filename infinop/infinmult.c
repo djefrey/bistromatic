@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinmult
+** bistromatic
 ** File description:
 ** infinmult
 */

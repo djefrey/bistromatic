@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** evalexpr
+** bistromatic
 ** File description:
-** evalexpr file
+** evalexpr
 */
 
 #include <stdlib.h>

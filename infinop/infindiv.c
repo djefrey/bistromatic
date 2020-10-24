@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** infindiv
+** bistromatic
 ** File description:
 ** infindiv
 */

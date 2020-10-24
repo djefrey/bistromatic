@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinadd
+** bistromatic
 ** File description:
-** infinitadd header
+** header with operations
 */
 
 #ifndef ADD_OPERATIONS_H

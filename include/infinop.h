@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinop
+** bistromatic
 ** File description:
 ** infinop
 */

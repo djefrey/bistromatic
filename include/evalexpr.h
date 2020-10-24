@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2020
-** evalexpr
+** bistromatic
 ** File description:
 ** evalexpr header
 */

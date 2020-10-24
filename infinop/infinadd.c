@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2020
-** infinadd
+** bistromatic
 ** File description:
-** main file for infinadd
+** infinadd
 */
 
 #include <stdlib.h>
