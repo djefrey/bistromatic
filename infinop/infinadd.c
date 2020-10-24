@@ -11,20 +11,20 @@
 
 static char switch_bigger_n_first(char **nb1, char **nb2, int *len1, int *len2)
 {
-    int smallest_len;
+    char *cpy1 = **nb1 == '-' ? *nb1 + 1 : *nb1;
+    char *cpy2 = **nb2 == '-' ? *nb2 + 1 : *nb2;
 
     *len1 = *nb1[0] == '-' ? my_strlen(*nb1) - 1 : my_strlen(*nb1);
     *len2 = *nb2[0] == '-' ? my_strlen(*nb2) - 1 : my_strlen(*nb2);
-    smallest_len = (*len1 < *len2 ? *len1 : *len2);
-    my_revstr(*nb1);
-    my_revstr(*nb2);
     if (*len2 > *len1) {
         my_strswap(nb1, nb2);
         my_intswap(len1, len2);
-    } else if (*len1 == *len2 && my_strncmp(*nb1, *nb2, smallest_len) < 0) {
+    } else if (*len1 == *len2 && my_strcmp(cpy1, cpy2) < 0) {
         my_strswap(nb1, nb2);
         my_intswap(len1, len2);
     }
+    my_revstr(*nb1);
+    my_revstr(*nb2);
     return (*(*nb1 + *len1) == '-' ? -1 : 1);
 }
 
@@ -105,7 +105,5 @@ char *infinadd(char *nb1, char *nb2)
     lens[1] = len2;
     op = get_addop(nb1[len1], nb2[len2]);
     result = do_infinadd(strs, lens, op, sign);
-    free(nb1);
-    free(nb2);
     return (result);
 }
