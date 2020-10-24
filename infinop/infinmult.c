@@ -53,20 +53,24 @@ static char *do_infinmult(char *nb1, char *nb2, int len1, int len2)
 
 char *infinmult(char *nb1, char *nb2)
 {
+    char *cpy1;
+    char *cpy2;
     char sign = get_sign(nb1, nb2);
     int len1 = (*nb1 == '-' ? my_strlen(nb1) - 1 : my_strlen(nb1));
     int len2 = (*nb2 == '-' ? my_strlen(nb2) - 1 : my_strlen(nb2));
     char *result;
 
-    nb1 = my_strdup(nb1);
-    nb2 = my_strdup(nb2);
-    my_revstr(nb1);
-    my_revstr(nb2);
+    cpy1 = my_strdup(nb1);
+    cpy2 = my_strdup(nb2);
+    my_revstr(cpy1);
+    my_revstr(cpy2);
     if (len2 > len1) {
         my_intswap(&len1, &len2);
-        my_strswap(&nb1, &nb2);
+        my_strswap(&cpy1, &cpy2);
     }
-    result = do_infinmult(nb1, nb2, len1, len2);
+    result = do_infinmult(cpy1, cpy2, len1, len2);
     remove_zeros(&result, sign);
+    free(cpy1);
+    free(cpy2);
     return (result);
 }
