@@ -55,15 +55,15 @@ int mult_op(char c1, char c2, int *carry)
 
 char *div_op(char *c1, char *divisor)
 {
-    int n_times = 1;
+    int n_times = 0;
     char *sub = infinsub(c1, divisor);
     char *mult;
 
     if (*sub == '-')
         return (my_strdup("0"));
-    while (*sub != '-' && !(*sub == '0' && *(sub + 1) == 0)) {
+    while (*sub != '-') {
         n_times++;
-        mult = infinmult(my_intstr(n_times), divisor);
+        mult = infinmult(my_intstr(n_times + 1), divisor);
         sub = infinsub(c1, mult);
     }
     return (my_intstr(n_times));
