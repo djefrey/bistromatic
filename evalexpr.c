@@ -35,12 +35,13 @@ char *brackets(char **str_ptr)
         result = summands(str_ptr);
         if (**str_ptr == ')')
             *str_ptr += 1;
-    } else if (**str_ptr == ')') {
-        *str_ptr += 1;
+    } else if (**str_ptr == '-' && *(*str_ptr + 1) == '(') {
+        *str_ptr += 2;
+        result = infinsub("0", summands(str_ptr));
+        if (**str_ptr == ')')
+            *str_ptr += 1;
+    } else
         result = number(str_ptr);
-    } else {
-        result = number(str_ptr);
-    }
     return (result);
 }
 
