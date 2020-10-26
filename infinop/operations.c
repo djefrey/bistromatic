@@ -10,7 +10,7 @@
 #include "operations.h"
 #include "infinop.h"
 
-int add_op(char c1, char c2, int *carry)
+char add_op(char c1, char c2, int *carry)
 {
     int a = c1 - 48;
     int b = c2 - 48;
@@ -21,10 +21,10 @@ int add_op(char c1, char c2, int *carry)
         result = result - 10;
     } else
         *carry = 0;
-    return (result);
+    return (result + 48);
 }
 
-int subs_op(char c1, char c2, int *carry)
+char subs_op(char c1, char c2, int *carry)
 {
     int a = c1 - 48;
     int b = c2 - 48;
@@ -36,10 +36,10 @@ int subs_op(char c1, char c2, int *carry)
     } else {
         *carry = 0;
     }
-    return (result);
+    return (result + 48);
 }
 
-int mult_op(char c1, char c2, int *carry)
+char mult_op(char c1, char c2, int *carry)
 {
     int a = c1 - 48;
     int b = c2 - 48;
@@ -50,7 +50,7 @@ int mult_op(char c1, char c2, int *carry)
         result %= 10;
     } else
         *carry = 0;
-    return (result);
+    return (result + 48);
 }
 
 char *div_op(char *c1, char *divisor)

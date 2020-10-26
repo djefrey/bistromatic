@@ -40,11 +40,13 @@ static char *do_infinmult(char *nb1, char *nb2, int len1, int len2)
     my_fillstr(res, '0', maxl);
     for (int i = 0; i < len2; i++) {
         for (int j = 0; j < len1; j++) {
-            mult = 48 + mult_op(nb1[j], nb2[i], &mult_car);
-            res[maxl - 1 - j - i] = 48 + add_op(mult, res[maxl - 1 - j - i], &add_car);
+            mult = mult_op(nb1[j], nb2[i], &mult_car);
+            res[maxl - 1 - j - i] =
+            add_op(mult, res[maxl - 1 - j - i], &add_car);
         }
         if (mult_car > 0)
-            res[maxl - 1 - len1 - i] = 48 + add_op(48 + mult_car, res[maxl - 1 - len1 - i], &add_car);
+            res[maxl - 1 - len1 - i] =
+            add_op(48 + mult_car, res[maxl - 1 - len1 - i], &add_car);
         add_car = 0;
         mult_car = 0;
     }

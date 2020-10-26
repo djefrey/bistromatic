@@ -80,7 +80,7 @@ static char *do_infinadd(char *nbrs[], int lens[], add_fct_t op, char sign)
     for (int i = 0; i < max_len; i++) {
         c1 = (i < lens[0] ? nbrs[0][i] : '0');
         c2 = (i < lens[1] ? nbrs[1][i] : '0');
-        result[max_len + 1 - i] = 48 + (*op)(c1, c2, &carry);
+        result[max_len + 1 - i] = (*op)(c1, c2, &carry);
     }
     result = finish_calc(result, nbrs, carry, sign);
     return (result);
