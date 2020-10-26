@@ -29,7 +29,7 @@ NAME_CRIT	=	calc_crit
 
 all:	$(NAME)
 
-$(NAME):	$(MAIN_OBJ) $(OBJ) 
+$(NAME):	$(MAIN_OBJ) $(OBJ)
 	make -C $(LIB_DIR)
 	gcc -o $(NAME) $(MAIN_OBJ) $(OBJ) -I$(INC_DIR) -L$(LIB_DIR) -lmy
 
