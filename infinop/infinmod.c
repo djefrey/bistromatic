@@ -12,7 +12,6 @@
 char *infinmod(char *nb1, char *nb2)
 {
     char *div = infindiv(nb1, nb2);
-    int nb1_len = my_strlen(nb1);
     char *mult;
     char *sub;
 
