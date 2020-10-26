@@ -6,6 +6,7 @@
 ##
 
 SRC			=	evalexpr.c				\
+				cleanexpr.c				\
 				./infinop/infinadd.c	\
 				./infinop/infinsub.c	\
 				./infinop/infinmult.c	\
