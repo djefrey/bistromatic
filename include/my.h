@@ -8,6 +8,8 @@
 #ifndef MY_H
 #define MY_H
 
+int my_compute_power_it(int nb, int p);
+
 void my_putchar(char c);
 int my_putstr(char const *str);
 int my_put_nbr(int nb);

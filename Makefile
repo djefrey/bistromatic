@@ -7,6 +7,7 @@
 
 SRC			=	evalexpr.c				\
 				cleanexpr.c				\
+				convert_base.c			\
 				./infinop/infinadd.c	\
 				./infinop/infinsub.c	\
 				./infinop/infinmult.c	\

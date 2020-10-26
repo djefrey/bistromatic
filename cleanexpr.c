@@ -5,9 +5,9 @@
 ** clean expression
 */
 
-#include "cleanexpr.h"
+#include "operators.h"
 
 char *clean_expr(char *expr, char *base, char *operators)
 {
-    
+
 }
