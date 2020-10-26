@@ -15,9 +15,9 @@ static char valid_base_ops(char *base, char *operators)
 
     if (base_len < 2 || op_len != 7)
         return (0);
-    for (int i = 0; i < base_len) {
+    for (int i = 0; i < base_len; i++) {
         for (int j = 0; j < op_len; j++) {
-            if (base[i] == op[j])
+            if (base[i] == operators[j])
                 return (0);
         }
     }
@@ -30,9 +30,9 @@ static char valid_brackets(char *expr, char *operators)
     int open_brackets = 0;
 
     for (int i = 0; i < expr_len; i++) {
-        if (expr[i] == OPEN_BRACKETS(operators))
+        if (expr[i] == OPEN_BRACKET(operators))
             open_brackets++;
-        else if (expr[i] == CLOSE_BRACKETS(operators))
+        else if (expr[i] == CLOSE_BRACKET(operators))
             open_brackets--;
     }
     return (open_brackets == 0);
@@ -53,7 +53,7 @@ char check_error(char *expr, char *base, char *operators)
 {
     if (!valid_base_ops(base, operators) || !valid_brackets(expr, operators))
         return (1);
-    else if (check_div_by_zero(expr, base, operators))
+    else if (!check_div_by_zero(expr, base, operators))
         return (1);
     return (0);
 }

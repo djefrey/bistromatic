@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include "my.h"
 #include "evalexpr.h"
-#include "cleanexpr.h"
+#include "bistromatic.h"
 
 int main(int ac, char **av)
 {
@@ -22,8 +22,12 @@ int main(int ac, char **av)
     size = my_getnbr(av[3]);
     expr = malloc(sizeof(char) * size);
     read(0, expr, size);
-    expr = clean_expr(expr, av[1], av[2]);
+    if (check_error(expr, av[1], av[2])) {
+        write(2, SYNTAX_ERROR_MSG, 12);
+        return (84);
+    }
     result = eval_expr(expr);
+    result = convert_dec_to_base(result, av[1]);
     my_putstr(result);
     return (0);
 }
