@@ -8,20 +8,19 @@
 #include <stdlib.h>
 #include "infinop.h"
 
-static int get_dec_to_base_len(int nbr, char *base, int base_size)
+static int get_dec_to_base_len(char *nb, char *base, char *base_size_str)
 {
-    int quotient = nbr;
+    char *quotient = nb;
     int remainder = 0;
     int length = 0;
 
-    if (nbr < 0) {
-        nbr *= -1;
-        quotient *= -1;
+    if (*nb == '-') {
+        length++;
+        quotient += 1;
     }
-    while (quotient > 0) {
-        quotient = nbr / base_size;
-        remainder = nbr - quotient * base_size;
-        nbr = quotient;
+    while (*quotient != '-' && !(*quotient == '0' && *(quotient + 1) == 0)) {
+        remainder = my_getnbr(infinmod(quotient, base_size_str));
+        quotient = infindiv(quotient, base_size_str);
         length++;
     }
     return (length);
@@ -50,26 +49,28 @@ char *convert_base_to_dec(char *nb, char *base, int size)
     return (str);
 }
 
-char *convert_dec_to_base(int nbr, char *base)
+char *convert_dec_to_base(char *nb, char *base)
 {
     int base_size = my_strlen(base);
-    int quotient = nbr;
+    char *base_size_str = my_intstr(base_size);
+    char *quotient = nb;
     int remainder = 0;
-    int length = get_dec_to_base_len(nbr, base, base_size);
+    int length = get_dec_to_base_len(nb, base, base_size_str);
     char *str = malloc(sizeof(char) * (length + 1));
-    int i = 0;
+    char *result = str;
 
-    /*if (is_nbr_neg(nbr)) {
-        nbr *= -1;
-        quotient *= -1;
-    }*/
-    while (quotient > 0) {
-        quotient = nbr / base_size;
-        remainder = nbr - quotient * base_size;
-        str[length - 1 - i] = base[remainder];
-        nbr = quotient;
-        i++;
+    if (*nb == '-') {
+        *str = '-';
+        quotient += 1;
+    } else
+        result += 1;
+    str += 1;
+    while (*quotient != '-' && !(*quotient == '0' && *(quotient + 1) == 0)) {
+        remainder = my_getnbr(infinmod(quotient, base_size_str));
+        quotient = infindiv(quotient, base_size_str);
+        *str = base[remainder];
+        str += 1;
     }
-    str[length] = '\0';
-    return (str);
+    my_revstr(result);
+    return (result);
 }
