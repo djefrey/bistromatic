@@ -27,6 +27,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 void my_fillstr(char *str, char c, int size);
 char *my_intstr(int nb);
 char *my_strcat(char *dest ,char const *src);
+char *convert_base(char const *nb, char const *base_from, char const *base_to);
 
 void my_intswap(int *a, int *b);
 void my_strswap(char **a, char **b);
