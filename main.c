@@ -21,6 +21,18 @@ char contains_char(char c, char *array)
     return (0);
 }
 
+int print_help(void)
+{
+    my_putstr("USAGE\n./calc base operators size_read\n");
+    my_putchar('\n');
+    my_putstr("DESCRIPTION\n");
+    my_putstr("- base: all the symbols of the base\n");
+    my_putstr("- operators: the symbols for the ");
+    my_putstr("parentheses and the 5 operators\n");
+    my_putstr("- size_read: number of characters to be read\n");
+    return (0);
+}
+
 int calculation(int ac, char **av)
 {
     char *expr;
@@ -46,6 +58,8 @@ int main(int ac, char **av)
 {
     if (ac == 4)
         return (calculation(ac, av));
+    else if (ac == 2 && my_strcmp(av[1], "-h") == 0)
+        return (print_help());
     else
         return (84);
 }
