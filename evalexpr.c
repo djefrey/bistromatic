@@ -10,6 +10,7 @@
 #include "evalexpr.h"
 #include "infinop.h"
 #include "operators.h"
+#include "bistromatic.h"
 
 char *number(char **str_ptr, char *base, char *ops)
 {
@@ -33,15 +34,17 @@ char *number(char **str_ptr, char *base, char *ops)
 char *brackets(char **str_ptr, char *base, char *ops)
 {
     char *result;
+    char *null_str = malloc(sizeof(char) * 2);
 
+    my_fillstr(null_str, base[0], 1);
     if (**str_ptr == OPEN_BRACKET(ops)) {
         *str_ptr += 1;
         result = summands(str_ptr, base, ops);
         if (**str_ptr == CLOSE_BRACKET(ops))
             *str_ptr += 1;
     } else if (**str_ptr == SUB_OP(ops) && *(*str_ptr + 1) == OPEN_BRACKET(ops)) {
-        *str_ptr += 2;*
-        result = infinsub("0", summands(str_ptr, base, ops));
+        *str_ptr += 2;
+        result = infinsub(null_str, summands(str_ptr, base, ops));
         if (**str_ptr == CLOSE_BRACKET(ops))
             *str_ptr += 1;
     } else

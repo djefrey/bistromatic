@@ -11,7 +11,7 @@
 #define SYNTAX_ERROR_MSG "syntax error"
 #define ERROR_MSG        "error"
 
+char contains_char(char c, char *array);
 char check_error(char *expr, char *base, char *operators);
-char *clean_expr(char *expr, char *base, char *operators);
 
 #endif /* !BISTROMATIC_H_ */
