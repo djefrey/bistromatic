@@ -27,7 +27,7 @@ char *number(char **str_ptr, char *base, char *ops)
     *str_ptr += len;
     if (*nbr == SUB_OP(ops))
         *nbr = '-';
-    nbr = convert_base_to_dec(nbr, base, len);
+    nbr = convert_base_to_dec(nbr, base);
     return (nbr);
 }
 
@@ -86,7 +86,7 @@ char *summands(char **str_ptr, char *base, char *ops)
     return (sum);
 }
 
-char *eval_expr(char const *str, char *base, char *ops)
+char *eval_expr(char *str, char *base, char *ops)
 {
     char *sum;
 

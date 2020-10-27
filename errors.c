@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "operators.h"
+#include "bistromatic.h"
 
 static char valid_base_ops(char *base, char *operators)
 {

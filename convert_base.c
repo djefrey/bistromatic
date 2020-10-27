@@ -7,8 +7,9 @@
 
 #include <stdlib.h>
 #include "infinop.h"
+#include "my.h"
 
-static int get_dec_to_base_len(char *nb, char *base, char *base_size_str)
+static int get_dec_to_base_len(char *nb, char *base_size_str)
 {
     char *quotient = nb;
     int length = 0;
@@ -54,7 +55,7 @@ char *convert_dec_to_base(char *nb, char *base)
     char *base_size_str = my_intstr(base_size);
     char *quotient = nb;
     int remainder = 0;
-    int length = get_dec_to_base_len(nb, base, base_size_str);
+    int length = get_dec_to_base_len(nb, base_size_str);
     char *str = malloc(sizeof(char) * (length + 1));
     char *result = str;
 
