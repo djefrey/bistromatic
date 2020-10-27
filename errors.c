@@ -37,11 +37,32 @@ static char valid_brackets(char *expr, char *operators)
     return (open_brackets != 0);
 }
 
+static char valid_op(char *expr, char *base, char *ops)
+{
+    char prev;
+    char next;
+
+    for (int i = 0; expr[i]; i++) {
+        if ((expr[i] == MULT_OP(ops) || expr[i] == DIV_OP(ops))
+        || (expr[i] == MOD_OP(ops))) {
+            prev = expr[i - 1];
+            next = expr[i + 1];
+            if ((!contains_char(prev, base) && prev != CLOSE_PAR(ops))
+            || (!contains_char(next, base) && next != OPEN_PAR(ops)))
+                return (1);
+            else if (expr[i + 1] == '\0' || expr[i] == expr[0])
+                return (1);
+        }
+    }
+    return (0);
+}
+
 char check_error(char *expr, char *base, char *operators)
 {
     int error = 0;
 
     error += valid_base_ops(base, operators);
     error += valid_brackets(expr, operators);
+    error += valid_op(expr, base, operators);
     return (error > 0);
 }
