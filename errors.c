@@ -20,6 +20,14 @@ static char valid_base_ops(char *base, char *operators)
         if (contains_char(base[i], operators))
             return (1);
     }
+    for (int i = 0; base[i] != '\0'; i++) {
+        if (contains_char(base[i], &base[i+1]))
+            return (1);
+    }
+    for (int i = 0; operators[i] != '\0'; i++) {
+        if (contains_char(operators[i], &operators[i+1]))
+            return (1);
+    }
     return (0);
 }
 
