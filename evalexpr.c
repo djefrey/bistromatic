@@ -57,7 +57,8 @@ char *factors(char **str_ptr, char *base, char *ops)
     char *factor = brackets(str_ptr, base, ops);
     char sign = -1;
 
-    while (**str_ptr == MULT_OP(ops) || **str_ptr == DIV_OP(ops) || **str_ptr == MOD_OP(ops)) {
+    while ((**str_ptr == MULT_OP(ops) || **str_ptr == DIV_OP(ops)
+    || **str_ptr == MOD_OP(ops)) && factor != NULL) {
         sign = **str_ptr;
         *str_ptr += 1;
         if (sign == MULT_OP(ops))
@@ -75,7 +76,8 @@ char *summands(char **str_ptr, char *base, char *ops)
     char *sum = factors(str_ptr, base, ops);
     char sign = 0;
 
-    while (**str_ptr == ADD_OP(ops) || **str_ptr == SUB_OP(ops)) {
+    while ((**str_ptr == ADD_OP(ops) || **str_ptr == SUB_OP(ops))
+    && sum != NULL) {
         sign = **str_ptr;
         *str_ptr += 1;
         if (sign == ADD_OP(ops))

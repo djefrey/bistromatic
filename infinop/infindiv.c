@@ -73,6 +73,8 @@ char *infindiv(char *nb1, char *nb2)
     int len2 = my_strlen(nb2);
     char *result = malloc(sizeof(char) * (len1 + 2));
 
+    if (my_str_isfilled(nb2, '0'))
+        return (NULL);
     if (is_first_bigger(nb1, nb2, len1, len2))
         return (my_strdup("0"));
     my_fillstr(result, '0', len1 + 1);

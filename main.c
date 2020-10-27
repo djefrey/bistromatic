@@ -47,6 +47,10 @@ int calculation(char **av)
         return (84);
     }
     result = eval_expr(expr, av[1], av[2]);
+    if (result == NULL) {
+        write(2, ERROR_MSG, 5);
+        return (84);
+    }
     result = convert_dec_to_base(result, av[1]);
     if (*result == '-')
         *result = SUB_OP(av[2]);
