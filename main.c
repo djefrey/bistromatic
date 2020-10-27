@@ -33,7 +33,7 @@ int print_help(void)
     return (0);
 }
 
-int calculation(int ac, char **av)
+int calculation(char **av)
 {
     char *expr;
     int size;
@@ -57,7 +57,7 @@ int calculation(int ac, char **av)
 int main(int ac, char **av)
 {
     if (ac == 4)
-        return (calculation(ac, av));
+        return (calculation(av));
     else if (ac == 2 && my_strcmp(av[1], "-h") == 0)
         return (print_help());
     else {
