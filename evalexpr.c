@@ -15,7 +15,6 @@ char *number(char **str_ptr, char *base, char *ops)
 {
     char *nbr;
     int len = 0;
-    char *res;
 
     if (**str_ptr == SUB_OP(ops))
         len++;
@@ -25,8 +24,10 @@ char *number(char **str_ptr, char *base, char *ops)
     my_fillstr(nbr, '0', len);
     my_strncpy(nbr, *str_ptr, len);
     *str_ptr += len;
-    res = convert_base_to_dec(nbr, base, len);
-    return (res);
+    if (*nbr == SUB_OP(ops))
+        *nbr = '-';
+    nbr = convert_base_to_dec(nbr, base, len);
+    return (nbr);
 }
 
 char *brackets(char **str_ptr, char *base, char *ops)
@@ -40,7 +41,6 @@ char *brackets(char **str_ptr, char *base, char *ops)
             *str_ptr += 1;
     } else if (**str_ptr == SUB_OP(ops) && *(*str_ptr + 1) == OPEN_BRACKET(ops)) {
         *str_ptr += 2;*
-        // A CHNAGER
         result = infinsub("0", summands(str_ptr, base, ops));
         if (**str_ptr == CLOSE_BRACKET(ops))
             *str_ptr += 1;

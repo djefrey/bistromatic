@@ -11,15 +11,11 @@
 static int get_dec_to_base_len(char *nb, char *base, char *base_size_str)
 {
     char *quotient = nb;
-    int remainder = 0;
     int length = 0;
 
-    if (*nb == '-') {
-        length++;
+    if (*nb == '-')
         quotient += 1;
-    }
     while (*quotient != '-' && !(*quotient == '0' && *(quotient + 1) == 0)) {
-        remainder = my_getnbr(infinmod(quotient, base_size_str));
         quotient = infindiv(quotient, base_size_str);
         length++;
     }
@@ -47,6 +43,8 @@ char *convert_base_to_dec(char *nb, char *base)
         mult = infinmult(my_intstr(index), my_intstr(factor));
         str = infinadd(str, mult);
     }
+    if (*nb == '-')
+        str = infinsub(my_intstr(0), str);
     return (str);
 }
 
@@ -60,12 +58,8 @@ char *convert_dec_to_base(char *nb, char *base)
     char *str = malloc(sizeof(char) * (length + 1));
     char *result = str;
 
-    if (*nb == '-') {
-        *str = '-';
+    if (*nb == '-')
         quotient += 1;
-    } else
-        result += 1;
-    str += 1;
     while (*quotient != '-' && !(*quotient == '0' && *(quotient + 1) == 0)) {
         remainder = my_getnbr(infinmod(quotient, base_size_str));
         quotient = infindiv(quotient, base_size_str);
@@ -73,5 +67,7 @@ char *convert_dec_to_base(char *nb, char *base)
         str += 1;
     }
     my_revstr(result);
+    if (*nb == '-')
+        result = infinsub(my_intstr(0), result);
     return (result);
 }

@@ -10,6 +10,7 @@
 #include "my.h"
 #include "evalexpr.h"
 #include "bistromatic.h"
+#include "operators.h"
 
 char contains_char(char c, char *array)
 {
@@ -37,6 +38,8 @@ int main(int ac, char **av)
     }
     result = eval_expr(expr, av[1], av[2]);
     result = convert_dec_to_base(result, av[1]);
+    if (*result == '-')
+        *result = SUB_OP(av[2]);
     my_putstr(result);
     return (0);
 }
