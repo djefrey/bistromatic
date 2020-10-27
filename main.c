@@ -11,6 +11,15 @@
 #include "evalexpr.h"
 #include "bistromatic.h"
 
+char contains_char(char c, char *array)
+{
+    for (; *array != '\0'; array += 1) {
+        if (*array == c)
+            return (1);
+    }
+    return (0);
+}
+
 int main(int ac, char **av)
 {
     char *expr;
@@ -26,7 +35,7 @@ int main(int ac, char **av)
         write(2, SYNTAX_ERROR_MSG, 12);
         return (84);
     }
-    result = eval_expr(expr);
+    result = eval_expr(expr, av[1], av[2]);
     result = convert_dec_to_base(result, av[1]);
     my_putstr(result);
     return (0);

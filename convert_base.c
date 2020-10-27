@@ -26,17 +26,18 @@ static int get_dec_to_base_len(char *nb, char *base, char *base_size_str)
     return (length);
 }
 
-char *convert_base_to_dec(char *nb, char *base, int size)
+char *convert_base_to_dec(char *nb, char *base)
 {
+    int nb_len = my_strlen(nb);
     int base_size = my_strlen(base);
     int factor = 0;
     int index = 0;
     char *mult;
-    char *str = malloc(sizeof(char) * (size + 1));
+    char *str = malloc(sizeof(char) * 2);
 
-    my_fillstr(str, '0', size + 1);
-    for (int i = 0; i < size; i++) {
-        factor = my_compute_power_it(base_size, size - i - 2);
+    my_fillstr(str, '0', 1);
+    for (int i = 0; i < nb_len; i++) {
+        factor = my_compute_power_it(base_size, nb_len - i - 1);
         for (int j = 0; j < base_size; j++) {
             if (base[j] == nb[i]) {
                 index = j;

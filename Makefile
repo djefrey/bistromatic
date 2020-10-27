@@ -6,7 +6,6 @@
 ##
 
 SRC			=	evalexpr.c				\
-				cleanexpr.c				\
 				convert_base.c			\
 				errors.c				\
 				./infinop/infinadd.c	\
