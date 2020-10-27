@@ -5,6 +5,8 @@
 ** return the given number to the power given
 */
 
+#include "my.h"
+
 int my_compute_power_it(int nb, int p)
 {
     long result = 1;
