@@ -88,12 +88,8 @@ char *summands(char **str_ptr, char *base, char *ops)
 
 char *eval_expr(char const *str, char *base, char *ops)
 {
-    int len = my_strlen(str);
-    char *expr = malloc(sizeof(char) * (len + 1));
     char *sum;
-    int cursor = 0;
 
-    expr[cursor] = '\0';
-    sum = summands(&expr, base, ops);
+    sum = summands(&str, base, ops);
     return (sum);
 }
