@@ -17,6 +17,7 @@ int my_put_nbr(int nb);
 unsigned char is_valid_int(long value);
 unsigned char is_digit(char c);
 int my_str_isnum(char const *str);
+char my_str_isfilled(char *str, char c);
 
 char *my_revstr(char *str);
 char *my_strcpy(char *dest, char const *src);

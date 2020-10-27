@@ -21,14 +21,12 @@ char contains_char(char c, char *array)
     return (0);
 }
 
-int main(int ac, char **av)
+int calculation(int ac, char **av)
 {
     char *expr;
     int size;
     char *result;
 
-    if (ac != 4)
-        return (84);
     size = my_getnbr(av[3]);
     expr = malloc(sizeof(char) * size);
     read(0, expr, size);
@@ -42,4 +40,12 @@ int main(int ac, char **av)
         *result = SUB_OP(av[2]);
     my_putstr(result);
     return (0);
+}
+
+int main(int ac, char **av)
+{
+    if (ac == 4)
+        return (calculation(ac, av));
+    else
+        return (84);
 }

@@ -61,7 +61,7 @@ char *convert_dec_to_base(char *nb, char *base)
 
     if (*nb == '-')
         quotient += 1;
-    while (*quotient != '-' && !(*quotient == '0' && *(quotient + 1) == 0)) {
+    while (*quotient != '-' && !my_str_isfilled(quotient, '0')) {
         remainder = my_getnbr(infinmod(quotient, base_size_str));
         quotient = infindiv(quotient, base_size_str);
         *str = base[remainder];

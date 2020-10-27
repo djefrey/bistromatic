@@ -11,3 +11,12 @@ void my_fillstr(char *str, char c, int size)
         *(str + i) = c;
     *(str + size) = '\0';
 }
+
+char my_str_isfilled(char *str, char c)
+{
+    for (int i = 0; str[i] != 0; i++) {
+        if (str[i] != c)
+            return (0);
+    }
+    return (1);
+}
