@@ -93,12 +93,6 @@ char *eval_expr(char const *str, char *base, char *ops)
     char *sum;
     int cursor = 0;
 
-    for (int i = 0; i < len; i++) {
-        if (str[i] != ' ') {
-            expr[cursor] = str[i];
-            cursor++;
-        }
-    }
     expr[cursor] = '\0';
     sum = summands(&expr, base, ops);
     return (sum);
