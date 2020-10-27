@@ -43,6 +43,6 @@ char check_error(char *expr, char *base, char *operators)
     int error = 0;
 
     error += valid_base_ops(base, operators);
-    error += valid_brackets(expr, operators));
+    error += valid_brackets(expr, operators);
     return (error > 0);
 }
