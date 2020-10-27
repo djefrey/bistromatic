@@ -45,11 +45,21 @@ static char valid_brackets(char *expr, char *operators)
     return (open_brackets != 0);
 }
 
+static char check_unknown(char *expr, char *base, char *ops)
+{
+    for (int i = 0; expr[i] != '\0'; i++) {
+        if (!contains_char(expr[i], base) && !contains_char(expr[i], ops))
+            return (1);
+    }
+    return (0);
+}
+
 char check_error(char *expr, char *base, char *operators)
 {
     int error = 0;
 
+    error += check_unknown(expr, base, operators);
     error += valid_base_ops(base, operators);
     error += valid_brackets(expr, operators);
-    return (error > 0);
+    return (error);
 }
