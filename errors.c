@@ -62,6 +62,7 @@ static char valid_op(char *expr, char *base, char *ops)
                 return (1);
         }
     }
+    return (0);
 }
 
 static char check_unknown(char *expr, char *base, char *ops)

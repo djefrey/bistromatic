@@ -94,6 +94,5 @@ char *eval_expr(char *str, char *base, char *ops)
     char *sum;
 
     sum = summands(&str, base, ops);
-    printf("SUM: %s\n", sum);
     return (sum);
 }
