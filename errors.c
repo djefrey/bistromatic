@@ -68,7 +68,9 @@ static char valid_op(char *expr, char *base, char *ops)
 static char check_unknown(char *expr, char *base, char *ops)
 {
     for (int i = 0; expr[i] != '\0'; i++) {
-        if (!contains_char(expr[i], base) && !contains_char(expr[i], ops))
+        if (expr[i] == '\n' && expr[i + 1] == '\0')
+            return (0);
+        else if (!contains_char(expr[i], base) && !contains_char(expr[i], ops))
             return (1);
     }
     return (0);
