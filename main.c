@@ -51,7 +51,8 @@ int calculation(char **av)
         write(2, ERROR_MSG, 5);
         return (84);
     }
-    result = convert_dec_to_base(result, av[1]);
+    if (my_strlen(av[1]) != 10 || my_strcmp(av[1], "0123456789") != 0)
+        result = convert_dec_to_base(result, av[1]);
     if (*result == '-')
         *result = SUB_OP(av[2]);
     my_putstr(result);

@@ -27,7 +27,8 @@ char *number(char **str_ptr, char *base, char *ops)
     *str_ptr += len;
     if (*nbr == SUB_OP(ops))
         *nbr = '-';
-    nbr = convert_base_to_dec(nbr, base);
+    if (my_strlen(base) != 10 || my_strcmp(base, "0123456789") != 0)
+        nbr = convert_base_to_dec(nbr, base);
     return (nbr);
 }
 
@@ -93,5 +94,6 @@ char *eval_expr(char *str, char *base, char *ops)
     char *sum;
 
     sum = summands(&str, base, ops);
+    printf("SUM: %s\n", sum);
     return (sum);
 }
