@@ -33,7 +33,7 @@ int print_help(void)
     return (0);
 }
 
-int calculation(char **av)
+char *calculation(char **av)
 {
     char *expr;
     int size;
@@ -60,7 +60,7 @@ int calculation(char **av)
 
 int main(int ac, char **av)
 {
-    char result;
+    char *result;
 
     if (ac == 4) {
         result = calculation(av);
