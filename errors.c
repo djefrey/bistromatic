@@ -84,5 +84,7 @@ char check_error(char *expr, char *base, char *operators)
     error += valid_base_ops(base, operators);
     error += valid_brackets(expr, operators);
     error += valid_op(expr, base, operators);
+    error += my_strlen(expr) == 0;
+    error += my_strlen(expr) == 1 && *expr == '\n';
     return (error);
 }
