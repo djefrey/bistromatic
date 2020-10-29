@@ -54,7 +54,7 @@ static void do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
         move_chars_to_left(carry, nb1[i]);
         carry_size++;
         div_res = div_op(carry, nb2);
-        if (div_res != 0 || carry_size >= my_strlen(nb2) - 1 || i == len1 - 1) {
+        if (div_res > 0 || carry_size >= my_strlen(nb2) - 1 || i == len1 - 1) {
             move_chars_to_left(quotient, div_res);
             sub = infinsub(carry, infinmult(my_intstr(div_res - 48), nb2));
             carry_size = my_strlen(sub);
