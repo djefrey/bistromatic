@@ -56,7 +56,8 @@ static char valid_op(char *expr, char *base, char *ops)
             prev = expr[i - 1];
             next = expr[i + 1];
             if ((!contains_char(prev, base) && prev != CLOSE_PAR(ops))
-            || (!contains_char(next, base) && next != OPEN_PAR(ops)))
+            || (!contains_char(next, base) && next != OPEN_PAR(ops)
+            && next != SUB_OP(ops)))
                 return (1);
             else if (expr[i + 1] == '\0' || expr[i] == expr[0])
                 return (1);
