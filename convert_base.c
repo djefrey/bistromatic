@@ -9,6 +9,19 @@
 #include "infinop.h"
 #include "my.h"
 
+static char *my_compute_power_str(char *nb, int p)
+{
+    char *result = my_intstr(1);
+
+    if (p == 0)
+        return (result);
+    else if (p < 0)
+        return (my_intstr(0));
+    for (int i = 0; i < p; i++)
+        result = infinmult(result, my_intstr(p));
+    return (result);
+}
+
 static int get_dec_to_base_len(char *nb, char *base_size_str)
 {
     char *quotient = nb;
@@ -27,6 +40,7 @@ char *convert_base_to_dec(char *nb, char *base)
 {
     int nb_len = my_strlen(nb);
     int base_size = my_strlen(base);
+    char *base_size_str = my_intstr(base_size);
     int factor = 0;
     int index = 0;
     char *mult;
@@ -34,7 +48,7 @@ char *convert_base_to_dec(char *nb, char *base)
 
     my_fillstr(str, '0', 1);
     for (int i = 0; i < nb_len; i++) {
-        factor = my_compute_power_it(base_size, nb_len - i - 1);
+        factor = my_compute_power_str(base_size_str, nb_len - i - 1);
         for (int j = 0; j < base_size; j++) {
             if (base[j] == nb[i]) {
                 index = j;
