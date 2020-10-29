@@ -43,7 +43,6 @@ char *convert_base_to_dec(char *nb, char *base)
     char *base_size_str = my_intstr(base_size);
     char *factor;
     int index = 0;
-    char *mult;
     char *str = malloc(sizeof(char) * 2);
 
     my_fillstr(str, '0', 1);
@@ -55,8 +54,7 @@ char *convert_base_to_dec(char *nb, char *base)
                 break;
             }
         }
-        mult = infinmult(my_intstr(index), factor);
-        str = infinadd(str, mult);
+        str = infinadd(str, infinmult(my_intstr(index), factor));
     }
     if (*nb == '-')
         str = infinsub(my_intstr(0), str);
