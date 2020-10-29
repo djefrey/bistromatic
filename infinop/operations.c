@@ -53,20 +53,20 @@ char mult_op(char c1, char c2, int *carry)
     return (result + 48);
 }
 
-char *div_op(char *c1, char *divisor)
+char div_op(char *c1, char *divisor)
 {
     int n_times = 0;
     char *sub = infinsub(c1, divisor);
     char *mult;
 
     if (*sub == '-')
-        return (my_strdup("0"));
+        return (48);
     while (*sub != '-') {
         n_times++;
         mult = infinmult(my_intstr(n_times + 1), divisor);
         sub = infinsub(c1, mult);
     }
-    return (my_intstr(n_times));
+    return (48 + n_times);
 }
 
 add_fct_t get_addop(char last1, char last2)

@@ -45,7 +45,7 @@ static void move_chars_to_left(char *str, char c)
 static void do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
 {
     char *carry = malloc(sizeof(char) * (len1 + 1));
-    char *div_res;
+    char div_res;
     int carry_size = 0;
     char *sub;
 
@@ -54,10 +54,9 @@ static void do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
         move_chars_to_left(carry, nb1[i]);
         carry_size++;
         div_res = div_op(carry, nb2);
-        if (!(*div_res == '0' && *(div_res + 1) == '\0')
-        || carry_size >= my_strlen(nb2) || i == len1 - 1) {
-            move_chars_to_left(quotient, *div_res);
-            sub = infinsub(carry, infinmult(div_res, nb2));
+        if (div_res != 0 || carry_size >= my_strlen(nb2) || i == len1 - 1) {
+            move_chars_to_left(quotient, div_res);
+            sub = infinsub(carry, infinmult(my_intstr(div_res - 48), nb2));
             carry_size = my_strlen(sub);
             for (int i = 0; i < len1 + 1; i++)
                 carry[len1 - i] =
