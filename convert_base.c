@@ -18,7 +18,7 @@ static char *my_compute_power_str(char *nb, int p)
     else if (p < 0)
         return (my_intstr(0));
     for (int i = 0; i < p; i++)
-        result = infinmult(result, my_intstr(p));
+        result = infinmult(result, nb);
     return (result);
 }
 
