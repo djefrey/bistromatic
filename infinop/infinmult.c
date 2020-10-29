@@ -44,7 +44,7 @@ static char *do_infinmult(char *nb1, char *nb2, int len1, int len2)
             res[maxl - 1 - j - i] =
             add_op(mult, res[maxl - 1 - j - i], &add_car);
         }
-        if (mult_car > 0|| add_car > 0)
+        if (mult_car > 0 || add_car > 0)
             res[maxl - 1 - len1 - i] =
             add_op(48 + mult_car, res[maxl - 1 - len1 - i], &add_car);
         add_car = 0;
