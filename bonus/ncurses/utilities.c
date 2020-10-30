@@ -7,6 +7,24 @@
 
 #include <stdlib.h>
 #include "my.h"
+#include "bonus_ncurses.h"
+
+static history_t *add_to_history(char *expr, char *result, history_t *prev)
+{
+    history_t *new = malloc(sizeof(history_t));
+
+    new->expr = my_strdup(expr);
+    new->result = my_strdup(result);
+    new->prev = prev;
+    return (new);
+}
+
+void replace_ans_save_expr(char **expr, char *result, history_t **hist)
+{
+    *hist = add_to_history(*expr, result, *hist);
+    free(*expr);
+    *expr = my_strdup(result);
+}
 
 char *add_ch(char *str, char c)
 {

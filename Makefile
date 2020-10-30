@@ -16,8 +16,10 @@ SRC			=	evalexpr.c						\
 				./infinop/infinmod.c			\
 				./infinop/operations.c
 NCURSES		=	./bonus/ncurses/graph_main.c	\
-				./bonus/ncurses/ncurses.c		\
-				./bonus/ncurses/utilities.c
+				./bonus/ncurses/windows.c		\
+				./bonus/ncurses/print_fcts.c	\
+				./bonus/ncurses/utilities.c		\
+				./bonus/ncurses/inputs.c
 TESTS		=	./tests/add_tests.c				\
 				./tests/mult_tests.c			\
 				./tests/div_tests.c				\

@@ -2,11 +2,10 @@
 ** EPITECH PROJECT, 2020
 ** bistromatic
 ** File description:
-** curses implementation
+** print fuctions
 */
 
 #include <stdlib.h>
-#include <ncurses.h>
 #include "bonus_ncurses.h"
 #include "my.h"
 
@@ -22,12 +21,20 @@ int move_cursor(int *line, int *col, int heigth, int width)
     return (1);
 }
 
-void print_expr(WINDOW *expr_win, char *expr)
+void print_expr(WINDOW *expr_win, char *expr, int offset)
 {
+    int len = my_strlen(expr);
+    int width = 3 * COLS / 4;
+    char c;
+
     wclear(expr_win);
     box(expr_win, ACS_VLINE, ACS_HLINE);
     mvwprintw(expr_win, 0, 3, " Calcul ");
-    mvwprintw(expr_win, 2, 3, expr);
+    for (int i = 0; i < width - 6; i++) {
+        c = i + offset < len ? expr[i + offset] : ' ';
+        mvwaddch(expr_win, 2, i + 3, c);
+    }
+    mvwprintw(expr_win, 4, 3, " %i - %i ", offset, len);
     wrefresh(expr_win);
 }
 
@@ -62,23 +69,4 @@ void print_history(WINDOW *history_win, history_t *history)
         history = history->prev;
     }
     wrefresh(history_win);
-}
-
-int init_window(WINDOW **expr_win, WINDOW **history_win)
-{
-    initscr();
-    start_color();
-    init_pair(DEFAULT_COLOR, COLOR_BLACK, COLOR_WHITE);
-    init_pair(HIGHLIGHT_COLOR, COLOR_WHITE, COLOR_BLACK);
-    bkgd(COLOR_PAIR(DEFAULT_COLOR));
-    *expr_win = subwin(stdscr, 5, 3 * COLS / 4, LINES / 16, COLS / 8);
-    *history_win = subwin(stdscr, 3 * LINES / 4, COLS / 3, LINES / 16 + 8, 3 * COLS / 5);
-    box(*expr_win, ACS_VLINE, ACS_HLINE);
-    box(*history_win, ACS_VLINE, ACS_HLINE);
-    mvwprintw(*expr_win, 0, 3, " Calcul ");
-    mvwprintw(*history_win, 0, 3, " History ");
-    refresh();
-    noecho();
-    curs_set(0);
-    return (0);
 }
