@@ -19,7 +19,7 @@ static history_t *add_to_history(char *expr, char *result, history_t *prev)
     return (new);
 }
 
-void replace_ans_save_expr(char **expr, char *result, history_t **hist)
+void replace_and_save_expr(char **expr, char *result, history_t **hist)
 {
     *hist = add_to_history(*expr, result, *hist);
     free(*expr);

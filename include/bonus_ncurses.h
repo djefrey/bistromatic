@@ -39,7 +39,7 @@ void print_history(WINDOW *history_win, history_t *history);
 
 int get_input(void);
 
-void replace_ans_save_expr(char **expr, char *result, history_t **hist);
+void replace_and_save_expr(char **expr, char *result, history_t **hist);
 char contains_char(char c, char *array);
 char *add_ch(char *str, char c);
 

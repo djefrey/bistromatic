@@ -17,7 +17,7 @@ static void set_base(int ac, char **av, calc_mode_t *calc_mode)
 {
     for (int i = 1; i < ac; i++) {
         if (av[i][0] == '-' && av[i][1] == 'b') {
-            calc_mode->base = &av[i][2];
+            calc_mode->base = my_strdup(&av[i][2]);
             return;
         }
     }
@@ -28,7 +28,7 @@ static void set_ops(int ac, char **av, calc_mode_t *calc_mode)
 {
     for (int i = 1; i < ac; i++) {
         if (av[i][0] == '-' && av[i][1] == 'o') {
-            calc_mode->ops = &av[i][2];
+            calc_mode->ops = my_strdup(&av[i][2]);
             return;
         }
     }
@@ -42,19 +42,19 @@ static void calculation(char **expr, calc_mode_t *calc_mode, history_t **hist)
     char *ops = calc_mode->ops;
 
     if (check_error(*expr, base, ops)) {
-        replace_ans_save_expr(expr, "Syntax error", hist);
+        replace_and_save_expr(expr, "Syntax error", hist);
         return;
     }
     result = eval_expr(*expr, base, ops);
     if (result == NULL) {
-        replace_ans_save_expr(expr, "Error", hist);
+        replace_and_save_expr(expr, "Error", hist);
         return;
     }
     if (my_strlen(base) != 10 || my_strcmp(base, "0123456789") != 0)
         result = convert_dec_to_base(result, base);
     if (*result == '-')
         *result = SUB_OP(ops);
-    replace_ans_save_expr(expr, result, hist);
+    replace_and_save_expr(expr, result, hist);
 }
 
 static void free_history(history_t *history)
