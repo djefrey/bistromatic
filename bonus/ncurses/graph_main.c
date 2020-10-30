@@ -57,10 +57,25 @@ static void calculation(char **expr, calc_mode_t *calc_mode, history_t **hist)
     replace_ans_save_expr(expr, result, hist);
 }
 
+static void free_history(history_t *history)
+{
+    history_t *tmp = history;
+    history_t *cpy = tmp;
+
+    while (tmp != NULL) {
+        free(tmp->expr);
+        free(tmp->result);
+        tmp = tmp->prev;
+        free(cpy);
+        cpy = tmp;
+    }
+}
+
 int main(int ac, char **av)
 {
     WINDOW *expr_win;
     WINDOW *history_win;
+    WINDOW *calc_mode_win;
     char *expr = malloc(sizeof(char) * 1);
     int c;
     int expr_len;
@@ -70,9 +85,9 @@ int main(int ac, char **av)
     int offset = 0;
 
     expr[0] = 0;
-    init_window(&expr_win, &history_win);
     set_base(ac, av, calc_mode);
     set_ops(ac, av, calc_mode);
+    init_window(&expr_win, &history_win, &calc_mode_win, calc_mode);
     while (run) {
         c = get_input();
         switch (c) {
@@ -108,5 +123,10 @@ int main(int ac, char **av)
         }
     }
     endwin();
+    free_history(history);
+    free(calc_mode->base);
+    free(calc_mode->ops);
+    free(calc_mode);
+    free(expr);
     return (0);
 }

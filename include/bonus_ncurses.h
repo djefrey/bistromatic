@@ -10,9 +10,6 @@
 
 #include <ncurses.h>
 
-#define DEFAULT_COLOR 1
-#define HIGHLIGHT_COLOR 1
-
 #define UNDEFINED_KEY -1
 #define ESC_KEY 0
 #define BACKSPACE_KEY 1
@@ -33,7 +30,10 @@ typedef struct calc_mode {
     char *ops;
 } calc_mode_t;
 
-int init_window(WINDOW **expr_win, WINDOW **history_win);
+int init_window(WINDOW **expr_win, WINDOW **history_win,
+WINDOW **calc_mode_win, calc_mode_t *calc_mode);
+
+void print_square(WINDOW *win, int origin[2], int size[2]);
 void print_expr(WINDOW *expr_win, char *expr, int offset);
 void print_history(WINDOW *history_win, history_t *history);
 

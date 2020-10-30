@@ -44,7 +44,7 @@ $(NAME):	$(MAIN_OBJ) $(OBJ)
 
 ncurses: $(OBJ) $(NCURSES_OBJ)
 	make -C $(LIB_DIR)
-	gcc -o $(NAME_NCURSES) $(OBJ) $(NCURSES_OBJ) -I$(INC_DIR) -L$(LIB_DIR) -lmy -lncurses
+	gcc -o $(NAME_NCURSES) $(OBJ) $(NCURSES_OBJ) -I$(INC_DIR) -L$(LIB_DIR) -lmy -lncurses -lm
 
 criterion: $(OBJ) $(TESTS_OBJ)
 	make -C $(LIB_DIR)

@@ -6,28 +6,89 @@
 */
 
 #include <stdlib.h>
+#include <math.h>
 #include "bonus_ncurses.h"
 #include "my.h"
 
-void init_subwins(WINDOW **expr_win, WINDOW **history_win)
+static void init_expr_subwin(WINDOW **expr_win)
 {
-    *expr_win = subwin(stdscr, 5, 3 * COLS / 4, LINES / 16, COLS / 8);
-    *history_win = subwin(stdscr, 3 * LINES / 4, COLS / 3, LINES / 16 + 8, 3 * COLS / 5);
+    int x = COLS / 8;
+    int y = LINES / 12;
+    int width = 3 * COLS / 4;
+    int heigth = 5;
+
+    *expr_win = subwin(stdscr, heigth, width, y, x);
     box(*expr_win, ACS_VLINE, ACS_HLINE);
-    box(*history_win, ACS_VLINE, ACS_HLINE);
     mvwprintw(*expr_win, 0, 3, " Calcul ");
     mvwprintw(*expr_win, 4, 3, " 0 - 0 ");
+}
+
+static void init_hist_subwin(WINDOW **history_win)
+{
+    int x = 11 * COLS / 20;
+    int y = LINES / 16 + 8;
+    int width = COLS / 3;
+    int heigth = 3 * LINES / 4;
+
+    *history_win = subwin(stdscr, heigth, width, y, x);
+    box(*history_win, ACS_VLINE, ACS_HLINE);
     mvwprintw(*history_win, 0, 3, " History ");
 }
 
-int init_window(WINDOW **expr_win, WINDOW **history_win)
+static void init_base_box(WINDOW **calc_mode_win, calc_mode_t *calc_mode,
+int win_width)
+{
+    int base_len = my_strlen(calc_mode->base);
+    int wsize = sqrt(base_len);
+    int hsize = base_len % wsize == 0 ? wsize : wsize + 1;
+    int width = 2 + (5 * (wsize + 1)) * 2;
+    int heigth = 2 + 5 * hsize;
+    int base_oribox[2] = {10, win_width / 2 - width / 2};
+    int base_sizebox[2] = {heigth, width};
+    int line = 3;
+    int col = 6;
+
+    print_square(*calc_mode_win, base_oribox, base_sizebox);
+    mvwprintw(*calc_mode_win, base_oribox[0], base_oribox[1] + 3, " Base ");
+    for (int i = 0; calc_mode->base[i]; i++) {
+        mvwaddch(*calc_mode_win, base_oribox[0] + line, base_oribox[1] + col, calc_mode->base[i]);
+        col += 12;
+        if (col >= (5 * (wsize + 1)) * 2) {
+            col = 6;
+            line += 5;
+        }
+    }
+}
+
+static void init_calc_mod_win(WINDOW **calc_mode_win, calc_mode_t *calc_mode)
+{
+    int x = 3 * COLS / 25;
+    int y = LINES / 16 + 8;
+    int width = COLS / 3;
+    int heigth = 3 * LINES / 4;
+    int ops_oribox[2] = {2, 3};
+    int ops_sizebox[2] = {5, width - 6};
+
+    *calc_mode_win = subwin(stdscr, heigth, width, y, x);
+    box(*calc_mode_win, ACS_VLINE, ACS_HLINE);
+    mvwprintw(*calc_mode_win, 0, 3, " Mode ");
+    print_square(*calc_mode_win, ops_oribox, ops_sizebox);
+    mvwprintw(*calc_mode_win, ops_oribox[0], ops_oribox[1] + 3, " Operators ");
+    for (int i = 0; i < 7; i++)
+        mvwaddch(*calc_mode_win, 4, (i + 1) * width / 8, calc_mode->ops[i]);
+    init_base_box(calc_mode_win, calc_mode, width);
+}
+
+int init_window(WINDOW **expr_win, WINDOW **history_win,
+WINDOW **calc_mode_win, calc_mode_t *calc_mode)
 {
     initscr();
-    start_color();
-    init_pair(DEFAULT_COLOR, COLOR_BLACK, COLOR_WHITE);
-    init_pair(HIGHLIGHT_COLOR, COLOR_WHITE, COLOR_BLACK);
-    bkgd(COLOR_PAIR(DEFAULT_COLOR));
-    init_subwins(expr_win, history_win);
+    attron(A_BOLD);
+    mvprintw(1, COLS / 2 - 6, "Bistromatic");
+    attroff(A_BOLD);
+    init_expr_subwin(expr_win);
+    init_hist_subwin(history_win);
+    init_calc_mod_win(calc_mode_win, calc_mode);
     refresh();
     noecho();
     curs_set(0);
