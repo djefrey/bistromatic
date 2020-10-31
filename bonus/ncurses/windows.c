@@ -54,7 +54,7 @@ int win_width, int win_height)
     for (int i = 0; calc_mode->base[i]; i++) {
         mvwaddch(*calc_mode_win, base_oribox[0] + line, base_oribox[1] + col, calc_mode->base[i]);
         col += 2 * space;
-        if (col >= (2 + 10 * wsize)) {
+        if (col >= (10 * wsize - 1)) {
             col = 1 + space;
             line += space;
         }

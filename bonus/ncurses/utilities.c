@@ -51,6 +51,7 @@ char contains_char(char c, char *array)
 int get_space_base_square(int base_len, int *wsize, int *hsize)
 {
     int space;
+    int width;
 
     if (base_len < 4) {
         *wsize = 2;
@@ -65,9 +66,14 @@ int get_space_base_square(int base_len, int *wsize, int *hsize)
             ceil((base_len - *wsize * *wsize) / (float)(*wsize));
         space = 5;
     } else {
-        *wsize = 4;
-        *hsize = 4;
-        space = 5 - base_len / 16;
+        space = 5 - (base_len - 16) / 15;
+        *wsize = sqrt(base_len);
+        width = space * *wsize / 5;
+        if (*wsize * *wsize == base_len)
+            *hsize = width;
+        else
+            *hsize = width +
+            ceil((base_len - *wsize * *wsize) / (float)(*wsize));
     }
     return (space);
 }
