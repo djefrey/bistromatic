@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <math.h>
 #include "my.h"
 #include "bonus_ncurses.h"
 
@@ -45,4 +46,28 @@ char contains_char(char c, char *array)
             return (1);
     }
     return (0);
+}
+
+int get_space_base_square(int base_len, int *wsize, int *hsize)
+{
+    int space;
+
+    if (base_len < 4) {
+        *wsize = 2;
+        *hsize = base_len < 3 ? 1 : 2;
+        space = 5;
+    } else if (base_len <= 16) {
+        *wsize = sqrt(base_len);
+        if (*wsize * *wsize == base_len)
+            *hsize = *wsize;
+        else
+            *hsize = *wsize +
+            ceil((base_len - *wsize * *wsize) / (float)(*wsize));
+        space = 5;
+    } else {
+        *wsize = 4;
+        *hsize = 4;
+        space = 5 - base_len / 16;
+    }
+    return (space);
 }

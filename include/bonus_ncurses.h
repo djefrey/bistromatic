@@ -42,5 +42,6 @@ int get_input(void);
 void replace_and_save_expr(char **expr, char *result, history_t **hist);
 char contains_char(char c, char *array);
 char *add_ch(char *str, char c);
+int get_space_base_square(int base_len, int *width, int *heigth);
 
 #endif /* !BONUS_NCURSES_H_ */

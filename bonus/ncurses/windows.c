@@ -36,26 +36,27 @@ static void init_hist_subwin(WINDOW **history_win)
 }
 
 static void init_base_box(WINDOW **calc_mode_win, calc_mode_t *calc_mode,
-int win_width)
+int win_width, int win_height)
 {
     int base_len = my_strlen(calc_mode->base);
-    int wsize = sqrt(base_len);
-    int hsize = base_len % wsize == 0 ? wsize : wsize + 1;
-    int width = 2 + (5 * (wsize + 1)) * 2;
+    int wsize;
+    int hsize;
+    int space = get_space_base_square(base_len, &wsize, &hsize);
+    int width = 2 + 10 * wsize;
     int heigth = 2 + 5 * hsize;
-    int base_oribox[2] = {10, win_width / 2 - width / 2};
+    int base_oribox[2] = {(win_height - 7) / 2 - heigth / 2 + 7, win_width / 2 - width / 2};
     int base_sizebox[2] = {heigth, width};
-    int line = 3;
-    int col = 6;
+    int line = 2;
+    int col = 1 + space;
 
     print_square(*calc_mode_win, base_oribox, base_sizebox);
     mvwprintw(*calc_mode_win, base_oribox[0], base_oribox[1] + 3, " Base ");
     for (int i = 0; calc_mode->base[i]; i++) {
         mvwaddch(*calc_mode_win, base_oribox[0] + line, base_oribox[1] + col, calc_mode->base[i]);
-        col += 12;
-        if (col >= (5 * (wsize + 1)) * 2) {
-            col = 6;
-            line += 5;
+        col += 2 * space;
+        if (col >= (2 + 10 * wsize)) {
+            col = 1 + space;
+            line += space;
         }
     }
 }
@@ -76,13 +77,14 @@ static void init_calc_mod_win(WINDOW **calc_mode_win, calc_mode_t *calc_mode)
     mvwprintw(*calc_mode_win, ops_oribox[0], ops_oribox[1] + 3, " Operators ");
     for (int i = 0; i < 7; i++)
         mvwaddch(*calc_mode_win, 4, (i + 1) * width / 8, calc_mode->ops[i]);
-    init_base_box(calc_mode_win, calc_mode, width);
+    init_base_box(calc_mode_win, calc_mode, width, heigth);
 }
 
 int init_window(WINDOW **expr_win, WINDOW **history_win,
 WINDOW **calc_mode_win, calc_mode_t *calc_mode)
 {
     initscr();
+    start_color();
     attron(A_BOLD);
     mvprintw(1, COLS / 2 - 6, "Bistromatic");
     attroff(A_BOLD);
