@@ -37,7 +37,7 @@ char *brackets(char **str_ptr, char *base, char *ops)
     char *result;
     char *null_str = malloc(sizeof(char) * 2);
 
-    my_fillstr(null_str, base[0], 1);
+    my_fillstr(null_str, '0', 1);
     if (**str_ptr == OPEN_PAR(ops)) {
         *str_ptr += 1;
         result = summands(str_ptr, base, ops);
