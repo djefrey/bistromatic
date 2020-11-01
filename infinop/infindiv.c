@@ -33,13 +33,20 @@ static char get_sign(char **nb1, char **nb2)
         return (1);
 }
 
-static void move_chars_to_left(char *str, char c)
+static void move_chars_to_left(char *str, char new_c)
 {
+    char c;
+
     while (*(str + 1) != '\0') {
-        *(str) = *(str + 1);
-        str += 1;
+        c = *(str + 1);
+        if (c >= '0' && c <= '9') {
+            *(str) = *(str + 1);
+            str += 1;
+        } else
+            break;
     }
-    *str = c;
+    *str = new_c;
+    *(str + 1) = 0;
 }
 
 static void do_infindiv(char *nb1, char *nb2, int len1, char *quotient)
