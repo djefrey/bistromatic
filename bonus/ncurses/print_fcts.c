@@ -55,35 +55,55 @@ int move_cursor(int *line, int *col, int heigth, int width)
     return (1);
 }
 
-void print_history(WINDOW *history_win, history_t *history)
+static int print_calculs(WINDOW *history_win, history_t **hist_ptr)
 {
     int width = COLS / 3;
     int heigth = 3 * LINES / 4;
     int line = 2;
     int col = 3;
+    int size = 0;
+    history_t *history = *hist_ptr;
 
-    wclear(history_win);
-    box(history_win, ACS_VLINE, ACS_HLINE);
-    mvwprintw(history_win, 0, 3, " History ");
     while (line < heigth - 2 && history != NULL) {
+        size++;
         for (int i = 0; history->expr[i]; i++) {
-            mvwaddch(history_win ,line, col, history->expr[i]);
+            mvwaddch(history_win, line, col, history->expr[i]);
             if (!move_cursor(&line, &col, heigth, width))
-                return;
+                break;
         }
         for (int i = 0; i < 3; i++) {
             mvwaddch(history_win ,line, col, " = "[i]);
             if (!move_cursor(&line, &col, heigth, width))
-                return;
+                break;
         }
         for (int i = 0; history->result[i]; i++) {
             mvwaddch(history_win ,line, col, history->result[i]);
             if (!move_cursor(&line, &col, heigth, width))
-                return;
+                break;
         }
         line++;
         col = 3;
         history = history->prev;
     }
+    *hist_ptr = history;
+    return (size);
+}
+
+void print_history(WINDOW *history_win, history_t *history, int offset)
+{
+    int heigth = 3 * LINES / 4;
+    int size = offset;
+
+    wclear(history_win);
+    box(history_win, ACS_VLINE, ACS_HLINE);
+    mvwprintw(history_win, 0, 3, " History ");
+    for (int i = 0; i < offset && history != NULL; i++)
+        history = history->prev;
+    size += print_calculs(history_win, &history);
+    while (history != NULL) {
+        size++;
+        history = history->prev;
+    }
+    mvwprintw(history_win, heigth - 1, 3, " %i - %i ", offset, size);
     wrefresh(history_win);
 }

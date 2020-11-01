@@ -35,7 +35,7 @@ WINDOW **calc_mode_win, calc_mode_t *calc_mode);
 
 void print_square(WINDOW *win, int origin[2], int size[2]);
 void print_expr(WINDOW *expr_win, char *expr, int offset);
-void print_history(WINDOW *history_win, history_t *history);
+void print_history(WINDOW *history_win, history_t *history, int offset);
 
 int get_input(void);
 

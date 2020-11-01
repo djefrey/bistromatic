@@ -33,6 +33,7 @@ static void init_hist_subwin(WINDOW **history_win)
     *history_win = subwin(stdscr, heigth, width, y, x);
     box(*history_win, ACS_VLINE, ACS_HLINE);
     mvwprintw(*history_win, 0, 3, " History ");
+    mvwprintw(*history_win, heigth - 1, 3, " 0 - 0 ");
 }
 
 static void init_base_box(WINDOW **calc_mode_win, calc_mode_t *calc_mode,
