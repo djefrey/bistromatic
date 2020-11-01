@@ -71,6 +71,28 @@ static void free_history(history_t *history)
     }
 }
 
+static int print_help(int ac, char **av)
+{
+    for (int i = 1; i < ac; i++) {
+        if (my_strlen(av[i]) == 2
+        && av[i][0] == '-' && av[i][1] == 'h') {
+            my_putstr("GRAPHICAL BISTROMATIC\n");
+            my_putstr("USAGE\n./calc_graph [-b'BASE'] [-o'OPS']\n");
+            my_putstr("\nDESCRIPTION\n");
+            my_putstr("-b'BASE' : define the base\n");
+            my_putstr("-o'OPS' : define the operators\n");
+            my_putstr("          use the following pattern : '()+-*/%'\n");
+            my_putstr("\nCONTROLS\n");
+            my_putstr("- ESCAPE (3 times) : exit\n");
+            my_putstr("- LEFT/RIGHT ARROW : move the expression\n");
+            my_putstr("- UP/DOWN ARROW : move the history\n");
+            my_putstr("- ENTER : calculate\n");
+            return (1);
+        }
+    }
+    return (0);
+}
+
 int main(int ac, char **av)
 {
     WINDOW *expr_win;
@@ -83,7 +105,13 @@ int main(int ac, char **av)
     history_t *history = NULL;
     calc_mode_t *calc_mode = malloc(sizeof(calc_mode_t));
     int offset = 0;
+    int hist_offset = 0;
 
+    if (print_help(ac, av)) {
+        free(calc_mode);
+        free(expr);
+        return (0);
+    }
     expr[0] = 0;
     set_base(ac, av, calc_mode);
     set_ops(ac, av, calc_mode);
@@ -97,7 +125,7 @@ int main(int ac, char **av)
             case ENTER_KEY:
                 calculation(&expr, calc_mode, &history);
                 print_expr(expr_win, expr, 0);
-                print_history(history_win, history);
+                print_history(history_win, history, hist_offset);
                 offset = 0;
                 break;
             case BACKSPACE_KEY:
@@ -113,6 +141,14 @@ int main(int ac, char **av)
             case RIGHT_KEY:
                 offset++;
                 print_expr(expr_win, expr, offset);
+                break;
+            case UP_KEY:
+                hist_offset = hist_offset > 0 ? hist_offset - 1 : hist_offset;
+                print_history(history_win, history, hist_offset);
+                break;
+            case DOWN_KEY:
+                hist_offset++;
+                print_history(history_win, history, hist_offset);
                 break;
             default:
                 if (c != -1) {
