@@ -63,6 +63,7 @@ int win_width, int win_height)
 
 static void init_calc_mod_win(WINDOW **calc_mode_win, calc_mode_t *calc_mode)
 {
+    int op_len = my_strlen(calc_mode->ops);
     int x = 3 * COLS / 25;
     int y = LINES / 16 + 8;
     int width = COLS / 3;
@@ -75,8 +76,12 @@ static void init_calc_mod_win(WINDOW **calc_mode_win, calc_mode_t *calc_mode)
     mvwprintw(*calc_mode_win, 0, 3, " Mode ");
     print_square(*calc_mode_win, ops_oribox, ops_sizebox);
     mvwprintw(*calc_mode_win, ops_oribox[0], ops_oribox[1] + 3, " Operators ");
-    for (int i = 0; i < 7; i++)
-        mvwaddch(*calc_mode_win, 4, (i + 1) * width / 8, calc_mode->ops[i]);
+    for (int i = 0; i < 7; i++) {
+        if (i < op_len)
+            mvwaddch(*calc_mode_win, 4, (i + 1) * width / 8, calc_mode->ops[i]);
+        else
+            mvwprintw(*calc_mode_win, 4, (i + 1) * width / 8 - 1, "ERR");
+    }
     init_base_box(calc_mode_win, calc_mode, width, heigth);
 }
 
